@@ -32,4 +32,5 @@ node_modules
 # Ignore build files
 public
 
-.idea
+# Ignore yarn files
+yarn.lock

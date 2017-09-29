@@ -3,7 +3,6 @@ var webpack = require('webpack');
 var path = require('path');
 var loaders = require('./webpack.loaders');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var DashboardPlugin = require('webpack-dashboard/plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const HOST = process.env.HOST || "127.0.0.1";
@@ -47,13 +46,11 @@ module.exports = {
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin({
       filename: 'style.css',
       allChunks: true
     }),
-    new DashboardPlugin(),
     new HtmlWebpackPlugin({
       template: './src/template.html',
       files: {
