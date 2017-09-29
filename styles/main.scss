@@ -1,7 +1,29 @@
 body {
-  background: #f00;
+  background: #ececec;
 }
 
-.reader{
-  background: #aaa;
+.textReader {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #bbb;
+  font-family: Georgia, serif;
+}
+
+.word {
+  display: flex;
+  font-size: 3em;
+  width: 100%;
+  
+  .first {
+    width: 50%;
+    text-align: right;
+  }
+
+  mark {
+    background-color: transparent;
+    padding: 0;
+    color: red;
+  }
 }

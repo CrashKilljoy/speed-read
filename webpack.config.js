@@ -49,7 +49,8 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin({
       filename: 'style.css',
-      allChunks: true
+      allChunks: true,
+			disable: process.env.NODE_ENV !== 'production'
     }),
     new HtmlWebpackPlugin({
       template: './src/template.html',
