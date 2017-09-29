@@ -18,9 +18,16 @@
   "license": "MIT",
   "homepage": "https://github.com/alicoding/react-webpack-babel#readme",
   "dependencies": {
+    "bootstrap": "^4.0.0-alpha.5",
+    "jquery": "^3.2.1",
     "node-sass": "^4.3.0",
-    "react": "15.6.1",
-    "react-dom": "15.4.2",
+    "popper": "^1.0.0",
+    "popper.js": "^1.12.5",
+    "react": "^15.6.1",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-addons-transition-group": "^15.6.2",
+    "react-dom": "^15.4.2",
+    "reactstrap": "^4.8.0",
     "sass-loader": "^6.0.2"
   },
   "devDependencies": {
