@@ -7,22 +7,36 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #bbb;
   font-family: Georgia, serif;
+
+  .v-line-dark {
+    width: 2px;
+    background: black;
+    position: absolute;
+    height: 200px;
+  }
+
+  .v-line-mask {
+    height: 72px;
+    position: absolute;
+    width: 2px;
+    background: #ececec;
+  }
 }
 
 .word {
   display: flex;
   font-size: 3em;
   width: 100%;
-  
+  z-index: 1;
   .first {
-    width: 50%;
+    width: 48.5%;
+    height: 100%;
     text-align: right;
   }
 
   mark {
-    background-color: transparent;
+    background-color: #ececec;
     padding: 0;
     color: red;
   }

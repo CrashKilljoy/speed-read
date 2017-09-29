@@ -62,6 +62,8 @@ export default class Reader extends React.Component {
 				<Row>
 					<Col xs={9}>
 						<Row className="textReader">
+							<div className="v-line-dark">&nbsp;</div>
+							<div className="v-line-mask">&nbsp;</div>
 							<Word node={word} nextWord={this.nextWord}/>
 						</Row>
 					</Col>
