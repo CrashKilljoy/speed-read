@@ -1,6 +1,6 @@
 import React from 'react';
 import Word from "./Word";
-
+import 'font-awesome/css/font-awesome.min.css';
 
 const longText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
@@ -68,7 +68,7 @@ export default class Reader extends React.Component {
 				<div className="tools">
 					<div className="button">Speed</div>
 					<div className="button">Back</div>
-					<div className="button">Pause</div>
+					<div className="button"><i className="fa fa-play" aria-hidden="true"/></div>
 				</div>
 			</div>
 		)
