@@ -11,6 +11,7 @@ export default class Reader extends React.Component {
 			words: [],
 			wordIdx: 0,
 			playing: false,
+			lastWord: false,
 		};
 	}
 
@@ -50,19 +51,31 @@ export default class Reader extends React.Component {
 
 	nextWord = () => {
 		if (this.state.playing) {
-			if (this.state.wordIdx < this.state.words.length) {
-				this.setState({wordIdx: this.state.wordIdx + 1})
+			this.setState({wordIdx: this.state.wordIdx + 1});
+			if (this.state.wordIdx === this.state.words.length - 1) {
+				this.setState({playing: false, lastWord: true});
 			}
 		}
 	};
 
 	handlePlay = () => {
+		if (this.state.lastWord) {
+			this.setState({wordIdx: 0, playing: false, lastWord: false});
+			return;
+		}
+
 		this.setState({playing: !this.state.playing});
+	};
+
+	getButtonState = () => {
+		if (this.state.lastWord) return "undo";
+
+		return this.state.playing ? "pause" : "play";
 	};
 
 	render() {
 		const word = this.state.words[this.state.wordIdx];
-		const {playing} = this.state;
+		const {playing, lastWord} = this.state;
 
 		return (
 			<div className="reader">
@@ -70,15 +83,14 @@ export default class Reader extends React.Component {
 					<div className="textReader">
 						<div className="v-line-dark">&nbsp;</div>
 						<div className="v-line-mask">&nbsp;</div>
-						<Word node={word} playing={playing} nextWord={this.nextWord}/>
+						<Word node={word} playing={playing} lastWord={lastWord} nextWord={this.nextWord}/>
 					</div>
 				</div>
 				<div className="tools">
 					<div className="button">Speed</div>
 					<div className="button">Back</div>
 					<div className="button" onClick={this.handlePlay}>
-						{playing && <i className="fa fa-pause" aria-hidden="true"/>}
-						{!playing && <i className="fa fa-play" aria-hidden="true"/>}
+						<i className={`fa fa-${this.getButtonState()}`} aria-hidden="true"/>
 					</div>
 				</div>
 			</div>

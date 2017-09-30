@@ -11,7 +11,7 @@ module.exports = [
   },
   {
     test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-    exclude: /(node_modules|bower_components)/,
+    // exclude: /(node_modules|bower_components)/,
     loader: "file-loader"
   },
   {

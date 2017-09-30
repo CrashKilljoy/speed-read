@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import ReactTimeout from 'react-timeout'
 
 const waitAfterShortWord = 1.2;
@@ -25,6 +26,12 @@ class Word extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
+		if(nextProps.lastWord){
+			this.props.clearTimeout();
+			console.log("last");
+			return;
+		}
+
 		if (nextProps.node !== this.props.node) {
 			this.props.setTimeout(this.props.nextWord, Word.getDelay(nextProps.node) * 200);
 			return;
@@ -55,5 +62,14 @@ class Word extends React.Component {
 		}
 	}
 }
+
+Word.propTypes = {
+	setTimeout: PropTypes.func.isRequired,
+	clearTimeout: PropTypes.func.isRequired,
+	playing: PropTypes.bool.isRequired,
+	lastWord: PropTypes.bool.isRequired,
+	node: PropTypes.object,
+	nextWord: PropTypes.func.isRequired,
+};
 
 export default ReactTimeout(Word)
