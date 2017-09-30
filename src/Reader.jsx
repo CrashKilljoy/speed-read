@@ -2,7 +2,7 @@ import React from 'react';
 import Word from "./Word";
 import 'font-awesome/css/font-awesome.min.css';
 
-const longText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
+const longText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
 export default class Reader extends React.Component {
 	constructor(props) {
@@ -73,6 +73,12 @@ export default class Reader extends React.Component {
 		return this.state.playing ? "pause" : "play";
 	};
 
+	handleBack = () => {
+		let newIdx = this.state.wordIdx - 10;
+		newIdx = newIdx < 0 ? 0 : newIdx;
+		this.setState({wordIdx: newIdx, lastWord: false});
+	};
+
 	render() {
 		const word = this.state.words[this.state.wordIdx];
 		const {playing, lastWord} = this.state;
@@ -88,7 +94,7 @@ export default class Reader extends React.Component {
 				</div>
 				<div className="tools">
 					<div className="button">Speed</div>
-					<div className="button">Back</div>
+					<div className="button" onClick={this.handleBack}>Back</div>
 					<div className="button" onClick={this.handlePlay}>
 						<i className={`fa fa-${this.getButtonState()}`} aria-hidden="true"/>
 					</div>
@@ -96,4 +102,5 @@ export default class Reader extends React.Component {
 			</div>
 		)
 	}
+
 }

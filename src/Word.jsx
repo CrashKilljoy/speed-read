@@ -8,6 +8,8 @@ const waitAfterPeriod = 3;
 const waitAfterParagraph = 3.5;
 const waitAfterLongWord = 1.5;
 
+let timer = {};
+
 class Word extends React.Component {
 	constructor(props) {
 		super(props);
@@ -26,19 +28,19 @@ class Word extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		if(nextProps.lastWord){
-			this.props.clearTimeout();
-			console.log("last");
+		this.props.clearTimeout(timer);
+		if (nextProps.lastWord) {
 			return;
 		}
 
 		if (nextProps.node !== this.props.node) {
-			this.props.setTimeout(this.props.nextWord, Word.getDelay(nextProps.node) * 200);
+			timer = this.props.setTimeout(this.props.nextWord, Word.getDelay(nextProps.node) * 200);
 			return;
 		}
 
-		if(nextProps.playing === true && this.props.playing === false){
-			this.props.setTimeout(this.props.nextWord, 100);
+		if (nextProps.playing === true && this.props.playing === false) {
+			this.props.clearTimeout(timer);
+			timer = this.props.setTimeout(this.props.nextWord, 100);
 		}
 	}
 
@@ -55,7 +57,7 @@ class Word extends React.Component {
 
 	render() {
 		const {node} = this.props;
-		if (node){
+		if (node) {
 			return this.createNode(node);
 		} else {
 			return null;
