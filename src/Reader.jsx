@@ -1,9 +1,8 @@
 import React from 'react';
-import {Button, ButtonGroup, Col, Container, Row} from "reactstrap";
 import Word from "./Word";
 
 
-const longText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+const longText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
 export default class Reader extends React.Component {
 	constructor(props) {
@@ -58,24 +57,20 @@ export default class Reader extends React.Component {
 		const word = this.state.words[this.state.wordIdx];
 
 		return (
-			<Container className="reader">
-				<Row>
-					<Col xs={9}>
-						<Row className="textReader">
-							<div className="v-line-dark">&nbsp;</div>
-							<div className="v-line-mask">&nbsp;</div>
-							<Word node={word} nextWord={this.nextWord}/>
-						</Row>
-					</Col>
-					<Col xs={3}>
-						<ButtonGroup vertical>
-							<Button>Speed</Button>
-							<Button>Back</Button>
-							<Button>Pause</Button>
-						</ButtonGroup>
-					</Col>
-				</Row>
-			</Container>
+			<div className="reader">
+				<div className="main">
+					<div className="textReader">
+						<div className="v-line-dark">&nbsp;</div>
+						<div className="v-line-mask">&nbsp;</div>
+						<Word node={word} nextWord={this.nextWord}/>
+					</div>
+				</div>
+				<div className="tools">
+					<div className="button">Speed</div>
+					<div className="button">Back</div>
+					<div className="button">Pause</div>
+				</div>
+			</div>
 		)
 	}
 }
