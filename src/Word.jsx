@@ -22,11 +22,16 @@ class Word extends React.Component {
 		if (word.length < 4) return waitAfterShortWord;
 		if (word.length > 11) return waitAfterLongWord;
 		return 1;
-	};
+	}
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.node !== this.props.node) {
-			this.props.setTimeout(this.props.nextWord, Word.getDelay(nextProps.node) * 200) // call the `toggle` function after 5000ms
+			this.props.setTimeout(this.props.nextWord, Word.getDelay(nextProps.node) * 200);
+			return;
+		}
+
+		if(nextProps.playing === true && this.props.playing === false){
+			this.props.setTimeout(this.props.nextWord, 100);
 		}
 	}
 
