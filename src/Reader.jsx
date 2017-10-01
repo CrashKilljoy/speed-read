@@ -19,7 +19,9 @@ export default class Reader extends React.Component {
 	}
 
 	componentDidMount() {
-		this.setState({words: this.textToNodes(longText)});
+		const params = new URLSearchParams(window.location.search);
+		const text = params.get("blobURL") || longText;
+		this.setState({words: this.textToNodes(text)});
 	}
 
 	textToNodes = (text) => {

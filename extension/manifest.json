@@ -13,5 +13,9 @@
     "permissions": [
         "activeTab",
         "contextMenus"
+    ],
+
+    "web_accessible_resources": [
+        "dist/index.html"
     ]
 }
