@@ -14,7 +14,9 @@ export default class Reader extends React.Component {
 			playing: false,
 			lastWord: false,
 			showSpeedSelector: false,
+			wpm: 400,
 		};
+		this.playingPrev = false;
 	}
 
 	componentDidMount() {
@@ -82,16 +84,24 @@ export default class Reader extends React.Component {
 	};
 
 	setSpeed = speed => {
-		this.setState({wpm: speed, showSpeedSelector: false});
+		this.setState({wpm: speed});
+		this.toggleSpeedSelector();
 	};
 
 	toggleSpeedSelector = () => {
-		this.setState({showSpeedSelector: !this.state.showSpeedSelector, playing: !this.state.showSpeedSelector});
+		if(this.state.showSpeedSelector){
+			console.log("set play to " + this.playingPrev);
+			this.setState({showSpeedSelector: false, playing: this.playingPrev});
+		} else {
+			this.playingPrev = this.state.playing;
+			this.setState({showSpeedSelector: true, playing: false});
+			console.log("playing is " + this.playingPrev);
+		}
 	};
 
 	renderMain = () => {
 		const word = this.state.words[this.state.wordIdx];
-		const {playing, lastWord, showSpeedSelector} = this.state;
+		const {playing, lastWord, showSpeedSelector, wpm} = this.state;
 
 		if (showSpeedSelector) {
 			return <SpeedSelect changeSpeed={this.setSpeed}/>
@@ -99,7 +109,7 @@ export default class Reader extends React.Component {
 		return (<div className="textReader">
 			<div className="v-line-dark">&nbsp;</div>
 			<div className="v-line-mask">&nbsp;</div>
-			<Word node={word} playing={playing} lastWord={lastWord} nextWord={this.nextWord}/>
+			<Word node={word} playing={playing} lastWord={lastWord} speed={wpm} nextWord={this.nextWord}/>
 		</div>);
 	};
 

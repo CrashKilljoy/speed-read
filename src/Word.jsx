@@ -15,16 +15,19 @@ class Word extends React.Component {
 		super(props);
 	}
 
-	static getDelay(node) {
+	static getDelay(node, speed) {
+		let factor = 1;
+
 		const word = node.word;
 		let lastChar = word[word.length - 1];
 		if (lastChar.match('”|"')) lastChar = word[word.length - 2];
-		if (lastChar === '\n') return waitAfterParagraph;
-		if ('.!?'.indexOf(lastChar) !== -1) return waitAfterPeriod;
-		if (',;:–'.indexOf(lastChar) !== -1) return waitAfterComma;
-		if (word.length < 4) return waitAfterShortWord;
-		if (word.length > 11) return waitAfterLongWord;
-		return 1;
+		if (lastChar === '\n') factor = waitAfterParagraph;
+		if ('.!?'.indexOf(lastChar) !== -1) factor = waitAfterPeriod;
+		if (',;:–'.indexOf(lastChar) !== -1) factor = waitAfterComma;
+		if (word.length < 4) factor = waitAfterShortWord;
+		if (word.length > 11) factor = waitAfterLongWord;
+
+		return factor  * 60 * 1000 / speed;
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -33,15 +36,18 @@ class Word extends React.Component {
 			return;
 		}
 
-		if (nextProps.node !== this.props.node) {
-			timer = this.props.setTimeout(this.props.nextWord, Word.getDelay(nextProps.node) * 200);
+		if (nextProps.node !== this.props.node || nextProps.speed !== this.props.speed) {
+			timer = this.props.setTimeout(this.props.nextWord, Word.getDelay(nextProps.node, nextProps.speed));
 			return;
 		}
 
 		if (nextProps.playing === true && this.props.playing === false) {
-			this.props.clearTimeout(timer);
 			timer = this.props.setTimeout(this.props.nextWord, 100);
 		}
+	}
+
+	componentDidMount(){
+		timer = this.props.setTimeout(this.props.nextWord, 100);
 	}
 
 	createNode = (node) => {
@@ -72,6 +78,7 @@ Word.propTypes = {
 	lastWord: PropTypes.bool.isRequired,
 	node: PropTypes.object,
 	nextWord: PropTypes.func.isRequired,
+	speed: PropTypes.number.isRequired,
 };
 
 export default ReactTimeout(Word)
