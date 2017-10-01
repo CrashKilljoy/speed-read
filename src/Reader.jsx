@@ -1,5 +1,4 @@
 import React from 'react';
-import 'font-awesome/css/font-awesome.min.css';
 import SpeedSelect from "./SpeedSelect";
 import Word from "./Word"
 
@@ -72,7 +71,7 @@ export default class Reader extends React.Component {
 	};
 
 	getButtonState = () => {
-		if (this.state.lastWord) return "undo";
+		if (this.state.lastWord) return "ccw";
 
 		return this.state.playing ? "pause" : "play";
 	};
@@ -118,10 +117,9 @@ export default class Reader extends React.Component {
 				{this.renderMain()}
 				<div className="tools">
 					<button className="button" onClick={this.toggleSpeedSelector}>WPM: {wpm}</button>
-					<button className="button" onClick={this.handleBack}><i className="fa fa-backward" aria-hidden="true"/>
-					</button>
+					<button className="button" onClick={this.handleBack}><i className="icon-fast-bw" aria-hidden="true"/></button>
 					<button className="button" onClick={this.handlePlay}>
-						<i className={`fa fa-${this.getButtonState()}`} aria-hidden="true"/>
+						<i className={`icon-${this.getButtonState()}`} aria-hidden="true"/>
 					</button>
 				</div>
 			</div>
