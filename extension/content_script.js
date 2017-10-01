@@ -4,22 +4,20 @@
 	}
 	window.hasRun = true;
 
-	function removeEverything() {
-		while (document.body.firstChild) {
-			document.body.firstChild.remove();
+	function showReaderFrame(request, sender, sendResponse) {
+		const readerId = 'readerIframe';
+		let readerIframe = document.getElementById(readerId);
+
+		if (readerIframe === null) {
+			readerIframe = document.createElement("iframe");
+			readerIframe.id = readerId;
 		}
+		
+		readerIframe.src = browser.extension.getURL(`dist/index.html?blobURL=${request.data}`);
+		readerIframe.setAttribute("style", "width: 100vw; height: 230px;");
+
+		document.body.appendChild(readerIframe);
 	}
 
-	function beastify(request, sender, sendResponse) {
-		removeEverything();
-
-		const insertImage = document.createElement("iframe");
-		insertImage.setAttribute("src", browser.extension.getURL(`dist/index.html?blobURL=${request.data}`));
-		insertImage.setAttribute("style", "width: 100vw; height: 230px;");
-
-		document.body.appendChild(insertImage);
-	}
-
-	browser.runtime.onMessage.addListener(beastify);
-
+	browser.runtime.onMessage.addListener(showReaderFrame);
 })();
