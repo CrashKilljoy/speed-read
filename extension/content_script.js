@@ -16,9 +16,7 @@
 
 			const icon = document.createElement("i");
 			closeButton.appendChild(icon);
-			icon.className = "icon-close";
-			icon.appendChild(document.createTextNode("close"));
-
+			icon.className = "icon-cancel";
 			closeButton.addEventListener('click', () => {
 				browser.runtime.sendMessage({
 					id: closeId

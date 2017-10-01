@@ -1,21 +1,19 @@
 {
-    "manifest_version": 2,
-    "name": "Speed read",
-    "description": "Read selected text really fast.",
-    "version": "1.0",
-
-    "background": {
-        "scripts": [
-            "background.js"
-        ]
-    },
-
-    "permissions": [
-        "activeTab",
-        "contextMenus"
-    ],
-
-    "web_accessible_resources": [
-        "dist/index.html"
+  "manifest_version": 2,
+  "name": "Speed read",
+  "description": "Read selected text really fast.",
+  "version": "1.0",
+  "background": {
+    "scripts": [
+      "background.js"
     ]
+  },
+  "permissions": [
+    "activeTab",
+    "contextMenus"
+  ],
+  "web_accessible_resources": [
+    "dist/index.html",
+    "fontello.woff2"
+  ]
 }

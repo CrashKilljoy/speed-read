@@ -1,3 +1,5 @@
+@import "fontello.css";
+
 #readerIframe {
     position: fixed;
     top: 0;
@@ -13,4 +15,6 @@ body {
     top: 10px;
     right: 10px;
     z-index: 999999;
+    font-size: 1.5em;
+    color: rgba(0, 0, 0, .4);
 }
