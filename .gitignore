@@ -34,3 +34,7 @@ public
 
 # Ignore yarn files
 yarn.lock
+
+.idea
+extension/dist/*
+
