@@ -1,6 +1,6 @@
 import React from 'react';
-import Word from "./Word";
 import 'font-awesome/css/font-awesome.min.css';
+import SpeedSelect from "./SpeedSelect";
 
 const longText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
@@ -76,7 +76,7 @@ export default class Reader extends React.Component {
 	handleBack = () => {
 		let newIdx = this.state.wordIdx - 10;
 		newIdx = newIdx < 0 ? 0 : newIdx;
-		this.setState({wordIdx: newIdx, lastWord: false});
+		this.setState({wordIdx: newIdx, playing: false, lastWord: false});
 	};
 
 	render() {
@@ -85,13 +85,13 @@ export default class Reader extends React.Component {
 
 		return (
 			<div className="reader">
-				<div className="main">
-					<div className="textReader">
-						<div className="v-line-dark">&nbsp;</div>
-						<div className="v-line-mask">&nbsp;</div>
-						<Word node={word} playing={playing} lastWord={lastWord} nextWord={this.nextWord}/>
-					</div>
-				</div>
+				{/*<div className="textReader">*/}
+				{/*<div className="v-line-dark">&nbsp;</div>*/}
+				{/*<div className="v-line-mask">&nbsp;</div>*/}
+				{/*<Word node={word} playing={playing} lastWord={lastWord} nextWord={this.nextWord}/>*/}
+				{/*</div>*/}
+
+				<SpeedSelect/>
 				<div className="tools">
 					<div className="button">Speed</div>
 					<div className="button" onClick={this.handleBack}>Back</div>
