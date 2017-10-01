@@ -27,7 +27,7 @@ class Word extends React.Component {
 		if (word.length < 4) factor = waitAfterShortWord;
 		if (word.length > 11) factor = waitAfterLongWord;
 
-		return factor  * 60 * 1000 / speed;
+		return factor * 60 * 1000 / speed;
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -42,12 +42,14 @@ class Word extends React.Component {
 		}
 
 		if (nextProps.playing === true && this.props.playing === false) {
-			timer = this.props.setTimeout(this.props.nextWord, 100);
+			this.props.nextWord();
 		}
 	}
 
-	componentDidMount(){
-		timer = this.props.setTimeout(this.props.nextWord, 100);
+	componentDidMount() {
+		if (this.props.playing) {
+			this.props.nextWord();
+		}
 	}
 
 	createNode = (node) => {

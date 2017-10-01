@@ -89,13 +89,11 @@ export default class Reader extends React.Component {
 	};
 
 	toggleSpeedSelector = () => {
-		if(this.state.showSpeedSelector){
-			console.log("set play to " + this.playingPrev);
+		if (this.state.showSpeedSelector) {
 			this.setState({showSpeedSelector: false, playing: this.playingPrev});
 		} else {
 			this.playingPrev = this.state.playing;
 			this.setState({showSpeedSelector: true, playing: false});
-			console.log("playing is " + this.playingPrev);
 		}
 	};
 
@@ -120,7 +118,8 @@ export default class Reader extends React.Component {
 				{this.renderMain()}
 				<div className="tools">
 					<button className="button" onClick={this.toggleSpeedSelector}>WPM: {wpm}</button>
-					<button className="button" onClick={this.handleBack}>Back</button>
+					<button className="button" onClick={this.handleBack}><i className="fa fa-backward" aria-hidden="true"/>
+					</button>
 					<button className="button" onClick={this.handlePlay}>
 						<i className={`fa fa-${this.getButtonState()}`} aria-hidden="true"/>
 					</button>
