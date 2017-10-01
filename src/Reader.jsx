@@ -1,6 +1,7 @@
 import React from 'react';
 import 'font-awesome/css/font-awesome.min.css';
 import SpeedSelect from "./SpeedSelect";
+import Word from "./Word"
 
 const longText = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum is simply dummy text of the printing and typesetting industry.";
 
@@ -12,6 +13,7 @@ export default class Reader extends React.Component {
 			wordIdx: 0,
 			playing: false,
 			lastWord: false,
+			showSpeedSelector: false,
 		};
 	}
 
@@ -80,29 +82,38 @@ export default class Reader extends React.Component {
 	};
 
 	setSpeed = speed => {
-		this.setState({wpm: speed});
-		console.log(speed)
+		this.setState({wpm: speed, showSpeedSelector: false});
+	};
+
+	toggleSpeedSelector = () => {
+		this.setState({showSpeedSelector: !this.state.showSpeedSelector, playing: !this.state.showSpeedSelector});
+	};
+
+	renderMain = () => {
+		const word = this.state.words[this.state.wordIdx];
+		const {playing, lastWord, showSpeedSelector} = this.state;
+
+		if (showSpeedSelector) {
+			return <SpeedSelect changeSpeed={this.setSpeed}/>
+		}
+		return (<div className="textReader">
+			<div className="v-line-dark">&nbsp;</div>
+			<div className="v-line-mask">&nbsp;</div>
+			<Word node={word} playing={playing} lastWord={lastWord} nextWord={this.nextWord}/>
+		</div>);
 	};
 
 	render() {
-		const word = this.state.words[this.state.wordIdx];
-		const {playing, lastWord} = this.state;
-
+		const {wpm} = this.state;
 		return (
 			<div className="reader">
-				{/*<div className="textReader">*/}
-				{/*<div className="v-line-dark">&nbsp;</div>*/}
-				{/*<div className="v-line-mask">&nbsp;</div>*/}
-				{/*<Word node={word} playing={playing} lastWord={lastWord} nextWord={this.nextWord}/>*/}
-				{/*</div>*/}
-
-				<SpeedSelect changeSpeed={this.setSpeed}/>
+				{this.renderMain()}
 				<div className="tools">
-					<div className="button">Speed</div>
-					<div className="button" onClick={this.handleBack}>Back</div>
-					<div className="button" onClick={this.handlePlay}>
+					<button className="button" onClick={this.toggleSpeedSelector}>WPM: {wpm}</button>
+					<button className="button" onClick={this.handleBack}>Back</button>
+					<button className="button" onClick={this.handlePlay}>
 						<i className={`fa fa-${this.getButtonState()}`} aria-hidden="true"/>
-					</div>
+					</button>
 				</div>
 			</div>
 		)

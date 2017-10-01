@@ -12,7 +12,7 @@ export default class SpeedSelect extends React.Component {
 		for (let i = 0; i < 8; i++) {
 			const speed = i * 100 + 100 + this.state.offset;
 			buttons.push(
-				<div key={i} className="button" onClick={() => this.props.changeSpeed(speed)}>{speed}</div>
+				<button key={i} className="button" onClick={() => this.props.changeSpeed(speed)}>{speed}</button>
 			);
 		}
 		return buttons;
@@ -32,7 +32,7 @@ export default class SpeedSelect extends React.Component {
 		return (
 			<div className="speedSelect">
 				{this.generateButtons()}
-				<div className="button" onClick={this.updateOffset}>{sign}50</div>
+				<button className="button" onClick={this.updateOffset}>{sign}50</button>
 			</div>
 		);
 	}
