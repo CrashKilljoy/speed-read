@@ -79,6 +79,11 @@ export default class Reader extends React.Component {
 		this.setState({wordIdx: newIdx, playing: false, lastWord: false});
 	};
 
+	setSpeed = speed => {
+		this.setState({wpm: speed});
+		console.log(speed)
+	};
+
 	render() {
 		const word = this.state.words[this.state.wordIdx];
 		const {playing, lastWord} = this.state;
@@ -91,7 +96,7 @@ export default class Reader extends React.Component {
 				{/*<Word node={word} playing={playing} lastWord={lastWord} nextWord={this.nextWord}/>*/}
 				{/*</div>*/}
 
-				<SpeedSelect/>
+				<SpeedSelect changeSpeed={this.setSpeed}/>
 				<div className="tools">
 					<div className="button">Speed</div>
 					<div className="button" onClick={this.handleBack}>Back</div>
@@ -102,5 +107,4 @@ export default class Reader extends React.Component {
 			</div>
 		)
 	}
-
 }
