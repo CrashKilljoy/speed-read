@@ -1,0 +1,9 @@
+#readerIframe {
+    position: fixed;
+    top: 0;
+    z-index: 99999;
+}
+
+body {
+    padding-top: 230px !important;
+}

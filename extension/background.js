@@ -12,6 +12,7 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
 			const gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
 			gettingActiveTab.then((tabs) => {
 				browser.tabs.sendMessage(tabs[0].id, {data: info.selectionText});
+				browser.tabs.insertCSS(tabs[0].id, {file: 'reader.css'});
 			});
 		}).catch(error => {
 				console.error(`Could not inject content script: ${error}`);

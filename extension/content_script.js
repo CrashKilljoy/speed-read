@@ -11,12 +11,11 @@
 		if (readerIframe === null) {
 			readerIframe = document.createElement("iframe");
 			readerIframe.id = readerId;
+			document.body.appendChild(readerIframe);
 		}
-		
+
 		readerIframe.src = browser.extension.getURL(`dist/index.html?blobURL=${request.data}`);
 		readerIframe.setAttribute("style", "width: 100vw; height: 230px;");
-
-		document.body.appendChild(readerIframe);
 	}
 
 	browser.runtime.onMessage.addListener(showReaderFrame);
