@@ -15,7 +15,19 @@ browser.contextMenus.onClicked.addListener((info, tab) => {
 				browser.tabs.insertCSS(tabs[0].id, {file: 'reader.css'});
 			});
 		}).catch(error => {
-				console.error(`Could not inject content script: ${error}`);
-			});
+			console.error(`Could not inject content script: ${error}`);
+		});
 	}
 });
+
+function handleMessage(request, sender, sendResponse) {
+	if (request.id === 'closeButton') {
+		const gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
+		gettingActiveTab.then((tabs) => {
+			browser.tabs.removeCSS(tabs[0].id, {file: 'reader.css'});
+		});
+	}
+	sendResponse({});
+}
+
+browser.runtime.onMessage.addListener(handleMessage);

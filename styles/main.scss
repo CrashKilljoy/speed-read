@@ -4,11 +4,11 @@ body {
 
 .reader {
   display: grid;
-  width: 40%;
+  width: 60%;
   height: 210px;
   min-width: 800px;
-  margin-left: 30%;
-  grid-template-columns: auto 20%;
+  margin-left: 20%;
+  grid-template-columns: auto 15%;
 
   .button {
     display: flex;

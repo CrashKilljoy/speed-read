@@ -7,3 +7,10 @@
 body {
     padding-top: 230px !important;
 }
+
+#closeButton {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 999999;
+}
