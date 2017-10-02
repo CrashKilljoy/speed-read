@@ -34,6 +34,10 @@
 		if (readerIframe === null) {
 			readerIframe = document.createElement("iframe");
 			readerIframe.id = readerId;
+			readerIframe.onload = () => {
+				//get focus to accept keyboard events
+				readerIframe.contentWindow.focus();
+			};
 			document.body.appendChild(readerIframe);
 			createCloseButton();
 		}
