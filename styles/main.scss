@@ -8,7 +8,7 @@ body {
   height: 210px;
   min-width: 800px;
   margin-left: 20%;
-  grid-template-columns: auto 20%;
+  grid-template-columns: auto 220px;
 
   .button {
     display: flex;
@@ -19,10 +19,9 @@ body {
     text-align: center;
     color: rgba(0, 0, 0, .4);
     font-weight: bold;
-
-      border: none;
-      text-decoration: none;
-      cursor: pointer;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
 
     &:hover {
       background-color: rgba(255, 255, 255, .9);
@@ -48,7 +47,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: Georgia, serif;
+    font-family: serif;
 
     .v-line-dark {
       width: 2px;
@@ -79,7 +78,7 @@ body {
     mark {
       background-color: #ececec;
       padding: 0;
-      color: red;
+      color: #0078ff;
     }
   }
 }
