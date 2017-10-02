@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Speed read",
-  "description": "Read selected text really fast.",
+  "description": "Read selected text really fast. The icon is based on works  Gregor Cresnar and Icons Bazaar from the Noun Project.",
   "version": "1.0",
   "background": {
     "scripts": [
@@ -15,5 +15,9 @@
   "web_accessible_resources": [
     "dist/index.html",
     "fontello.woff2"
-  ]
+  ],
+  "icons": {
+    "48": "icon.svg",
+    "96": "icon.svg"
+  }
 }
