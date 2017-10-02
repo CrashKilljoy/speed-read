@@ -5,6 +5,21 @@
 	window.hasRun = true;
 	const readerId = 'readerIframe';
 	const closeId = 'closeButton';
+	const veilId = 'veil';
+
+	function closeReader() {
+		browser.runtime.sendMessage({
+			id: closeId
+		}).then(response => {
+			document.getElementById(readerId).remove();
+			const closeButton = document.getElementById(closeId);
+			closeButton.removeEventListener("click", closeReader);
+			closeButton.remove();
+			const veil = document.getElementById(veilId);
+			veil.removeEventListener("click", closeReader);
+			veil.remove();
+		}, err => console.error(err));
+	}
 
 	function createCloseButton() {
 		let closeButton = document.getElementById(closeId);
@@ -17,14 +32,7 @@
 			const icon = document.createElement("i");
 			closeButton.appendChild(icon);
 			icon.className = "icon-cancel";
-			closeButton.addEventListener('click', () => {
-				browser.runtime.sendMessage({
-					id: closeId
-				}).then(response => {
-					document.getElementById(readerId).remove();
-					document.getElementById(closeId).remove();
-				}, err => console.error(err));
-			});
+			closeButton.addEventListener('click', closeReader);
 		}
 	}
 
@@ -40,11 +48,17 @@
 			};
 			document.body.appendChild(readerIframe);
 			createCloseButton();
+
+			let veil = document.createElement("div");
+			veil.id = veilId;
+			document.body.appendChild(veil);
+			veil.addEventListener('click', closeReader);
 		}
 
 		readerIframe.src = browser.extension.getURL(`dist/index.html?blobURL=${request.data}`);
 		readerIframe.setAttribute("style", "width: 100vw; height: 230px;");
 	}
+
 
 	browser.runtime.onMessage.addListener(showReaderFrame);
 })();
