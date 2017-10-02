@@ -22,7 +22,55 @@ export default class Reader extends React.Component {
 		const params = new URLSearchParams(window.location.search);
 		const text = params.get("blobURL") || longText;
 		this.setState({words: this.textToNodes(text)});
+		document.addEventListener("keydown", this.handleKeyDown);
 	}
+
+	componentWillUnmount() {
+		document.removeEventListener("keydown", this.handleKeyDown);
+	}
+
+	handleKeyDown = (event) => {
+		if (event.defaultPrevented) {
+			return; // Do nothing if the event was already processed
+		}
+
+		switch (event.code) {
+			case "ArrowDown":
+				this.setSpeed(this.state.wpm - 50);
+				break;
+			case "ArrowUp":
+				this.setSpeed(this.state.wpm + 50);
+				break;
+			case "ArrowLeft":
+				this.rewind();
+				break;
+			case "ArrowRight":
+				this.fastForward();
+				break;
+			case "Space":
+				this.handlePlay();
+				break;
+			default:
+				return; // Quit when this doesn't handle the key event.
+		}
+
+		// Cancel the default action to avoid it being handled twice
+		event.preventDefault();
+	};
+
+	rewind = () => {
+		if (this.state.wordIdx > 0) {
+			this.setState({wordIdx: this.state.wordIdx - 1});
+		}
+		this.setState({playing: false, lastWord: false});
+	};
+
+	fastForward = () => {
+		this.setState({playing: false});
+		if (this.state.lastWord === false) {
+			this.moveToNextWord();
+		}
+	};
 
 	textToNodes = (text) => {
 		text = "3\n 2\n 1\n " + text.trim('\n').replace(/\s+\n/g, '\n');
@@ -54,12 +102,16 @@ export default class Reader extends React.Component {
 					Math.floor(length / 2) - 1));
 	}
 
+	moveToNextWord = () => {
+		this.setState({wordIdx: this.state.wordIdx + 1});
+		if (this.state.wordIdx === this.state.words.length - 1) {
+			this.setState({playing: false, lastWord: true});
+		}
+	};
+
 	nextWord = () => {
 		if (this.state.playing) {
-			this.setState({wordIdx: this.state.wordIdx + 1});
-			if (this.state.wordIdx === this.state.words.length - 1) {
-				this.setState({playing: false, lastWord: true});
-			}
+			this.moveToNextWord();
 		}
 	};
 
@@ -85,8 +137,8 @@ export default class Reader extends React.Component {
 	};
 
 	setSpeed = speed => {
-		this.setState({wpm: speed});
-		this.toggleSpeedSelector();
+		const wpm = Math.min(Math.max(speed, 100), 850);
+		this.setState({wpm: wpm, showSpeedSelector: false});
 	};
 
 	toggleSpeedSelector = () => {

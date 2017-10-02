@@ -70,7 +70,7 @@ body {
     width: 100%;
     z-index: 1;
     .first {
-      width: 48.5%;
+      width: calc(50% - 0.7rem);
       height: 100%;
       text-align: right;
     }
