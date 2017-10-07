@@ -13,7 +13,7 @@ export default class Reader extends React.Component {
 			playing: false,
 			lastWord: false,
 			showSpeedSelector: false,
-			wpm: 400,
+			wpm: 500,
 		};
 		this.playingPrev = false;
 	}
@@ -21,7 +21,8 @@ export default class Reader extends React.Component {
 	componentDidMount() {
 		const params = new URLSearchParams(window.location.search);
 		const text = params.get("blobURL") || longText;
-		this.setState({words: this.textToNodes(text)});
+		const speed = params.get("speed") || 500;
+		this.setState({words: this.textToNodes(text), wpm: speed});
 		document.addEventListener("keydown", this.handleKeyDown);
 	}
 

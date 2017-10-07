@@ -6,6 +6,7 @@
 	const readerId = 'readerIframe';
 	const closeId = 'closeButton';
 	const veilId = 'veil';
+	let wpmParam = 0;
 
 	function closeReader() {
 		browser.runtime.sendMessage({
@@ -54,11 +55,15 @@
 			document.body.appendChild(veil);
 			veil.addEventListener('click', closeReader);
 		}
-
-		readerIframe.src = browser.extension.getURL(`dist/index.html?blobURL=${request.data}`);
-		readerIframe.setAttribute("style", "width: 100vw; height: 230px;");
+		browser.storage.local.get("speed").then(item => {
+			wpmParam = item.speed || 123;
+		}).then(
+			() => {
+				readerIframe.src = browser.extension.getURL(`dist/index.html?speed=${wpmParam}&blobURL=${request.data}`);
+				readerIframe.setAttribute("style", "width: 100vw; height: 230px;");
+			}
+		)
 	}
-
 
 	browser.runtime.onMessage.addListener(showReaderFrame);
 })();

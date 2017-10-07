@@ -10,12 +10,16 @@
   },
   "permissions": [
     "activeTab",
-    "contextMenus"
+    "contextMenus",
+    "storage"
   ],
   "web_accessible_resources": [
     "dist/index.html",
     "fontello.woff2"
   ],
+  "options_ui": {
+    "page": "options.html"
+  },
   "icons": {
     "48": "icon.svg",
     "96": "icon.svg"
